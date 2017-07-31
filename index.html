@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <title>Weather API</title>
+    <style>
+        .form-group {
+            background-color: lightblue;
+            box-shadow: 10px 10px 5px black;
+            margin-top: 40px;
+            margin-left: 40%;
+            padding: 35px;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body class="container">
+
+    <form action="" class="row col-md-8 m-3">
+        <div class="form-group">
+            <label for="cityInput">City:</label>
+            <input class="form-control" type="text" id="cityInput"></br>
+            <input class="btn btn-primary" type="submit" value="Get Weather" id="citySubmit"></br>
+        </div>
+    </form>
+
+    <h1 class="text-center" id="city"></h1>
+    <p class="text-center" id="weather"></p>
+
+    <script>
+        "use strict";
+        const appID = "2cc7d408f527de19889ec31f5c22aa33";
+
+        let submit = document.querySelector('#citySubmit');
+        submit.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            let city = document.querySelector("#cityInput").value;
+
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = displayWeather;
+            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + city +
+                '&APPID=' + appID, true);
+            xhr.send(null);
+
+        });
+        // function qui affiche le temps (weather) avec la requete ajax
+        function displayWeather(event) {
+            // XMLHttpRequest.DONE === 4
+            if (this.readyState === XMLHttpRequest.DONE) {
+                if (this.status === 200) {
+                    console.log("Réponse reçu: " + this.responseText);
+                    let data = JSON.parse(this.responseText);
+                    let h1 = document.querySelector("#city");
+                    h1.textContent = data["name"];
+                    let p = document.querySelector("#weather");
+                    p.textContent = data['weather'][0]['main'];
+                } else {
+                    console.log("Status de la réponse: " + this.status);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
