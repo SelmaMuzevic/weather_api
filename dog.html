@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chiens</title>
+</head>
+
+<body>
+
+    <!--<h1>Shiba</h1>
+    <img src="https:\/\/dog.ceo\/api\/img\/shiba\/shiba-5.jpg" alt="Shiba">-->
+
+    <script>
+        "use strict";
+        // on a recupere (fetch) l'image avec le lien http et l'informations de JSON
+        fetch('https://dog.ceo/api/breed/shiba/afghan/images/random')
+            .then(function(request) {
+                return request.json();
+            }).then(function(json) {
+                console.log(json);
+
+                // creation d'un element js (image)
+                let img = document.createElement('img');
+                img.src = json.message;
+                document.body.appendChild(img);
+
+            }).catch(function(error) {
+                console.error(error.message);
+            });
+    </script>
+
+</body>
+
+</html>
