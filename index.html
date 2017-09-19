@@ -12,7 +12,7 @@
         .form-group {
             background-color: lightblue;
             box-shadow: 10px 10px 5px black;
-            margin-top: 40px;
+            margin-top: 150px;
             margin-left: 40%;
             padding: 35px;
             width: 50%;
@@ -22,7 +22,7 @@
 
 <body class="container">
 
-    <form action="" class="row col-md-8 m-3">
+    <form action="" class="col-md-8 m-3">
         <div class="form-group">
             <label for="cityInput">City:</label>
             <input class="form-control" type="text" id="cityInput"></br>
@@ -43,6 +43,7 @@
 
             let city = document.querySelector("#cityInput").value;
 
+            // on lance la requete xhr 
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = displayWeather;
             xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + city +
@@ -50,7 +51,7 @@
             xhr.send(null);
 
         });
-        // function qui affiche le temps (weather) avec la requete ajax
+        // function qui affiche la meteo (weather) avec la requete ajax
         function displayWeather(event) {
             // XMLHttpRequest.DONE === 4
             if (this.readyState === XMLHttpRequest.DONE) {
