@@ -46,7 +46,7 @@
             // on lance la requete xhr 
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = displayWeather;
-            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + city +
+            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + city +
                 '&APPID=' + appID, true);
             xhr.send(null);
 
